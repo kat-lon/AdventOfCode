@@ -8,12 +8,12 @@ def create_storage(line):
 
 def fill_crates(lines):
     crates = create_storage(lines[0])
-    finalLine = 0
+    final_line = 0
 
     for line in lines:
         
         if(line[1].isdigit()):
-            finalLine += 2
+            final_line += 2
             break
 
         i, j = 1, 0
@@ -23,12 +23,12 @@ def fill_crates(lines):
             i += 4
             j += 1
 
-        finalLine += 1
+        final_line += 1
 
     for stack in crates:
         stack.reverse()
         
-    return crates, finalLine
+    return crates, final_line
 
 def get_moves(lines):
     moves = []
