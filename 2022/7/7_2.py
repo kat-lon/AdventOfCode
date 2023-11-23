@@ -10,7 +10,6 @@ def execute_cd(current_dir, new_dir):
     
     return current_dir
 
-
 def get_best_dir(starting_dir, best_option, min_size):
     for child in starting_dir.children:
         best_option = get_best_dir(child, best_option, min_size)
