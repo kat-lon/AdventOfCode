@@ -7,13 +7,12 @@ def move_head(head_pos, direction):
 
 def move_tail(head_pos, tail_pos):
     distance = [head_pos[i] - tail_pos[i] for i in range(0, 2)]
-    print()
 
-    if (0 in distance and 2 in distance):
+    if (0 in distance and (2 in distance or -2 in distance)):
         for i in range(0, 2):
             if (distance[i] not in range(-1, 2)):
-                tail_pos[i] += 1 if distance[i] > 0 else -1    
-    elif (2 in distance):
+                tail_pos[i] += 1 if distance[i] > 0 and distance[i] not in range(-1, 2) else -1    
+    elif (2 in distance or -2 in distance):
         for i in range(0, 2):           
             tail_pos[i] += 1 if distance[i] > 0 else -1
         
@@ -29,8 +28,6 @@ def execute_moves(moves):
 
             if (tail_pos not in all_tail_pos):
                 all_tail_pos.append(tail_pos[:])
-            print(f"head {head_pos}")
-            print(f"tail {tail_pos}")
 
     return all_tail_pos
             
