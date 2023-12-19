@@ -7,8 +7,16 @@ class Monkey:
         self.prime = kwargs["prime"]
         self.companions = (kwargs["true:"], kwargs["false:"])
 
-    def __throw(self, item, monkey):
-        monkey.items.append(item)
+    def __throw__(self, item, monkey):
+        monkey.items.append(item%9699690)
+
+    def __reducer__(self, item):
+        primes = [2, 3, 5, 7, 11, 13, 17, 19]
+        reduced = 1
+        for prime in primes:
+            if item % prime == 0: reduced *= prime**(item//prime)
+        return reduced
+
 
     def set_companions(self, monkey_true, monkey_false):
         self.companions = (monkey_true, monkey_false)
@@ -22,10 +30,10 @@ class Monkey:
         if self.operation[0] == "*": item *= self.operation[1]
         elif self.operation[0] == "+": item += self.operation[1]
         else: item = item * item
-        item //= 3
+
         companion = self.companions[0] if item % self.prime == 0 else self.companions[1]
 
-        self.__throw(item, companion)
+        self.__throw__(item, companion)
 
 
 def monkey_god(lines):
@@ -49,7 +57,7 @@ def monkey_god(lines):
                     monkey_data = {}
     return monkeys   
 
-with open("adventOfCode/2022/11/monkey_bussines copy.txt") as file:
+with open("adventOfCode/2022/11/monkey_bussines.txt") as file:
     lines = [line.strip() for line in file.readlines()]
 
 monkeys = monkey_god(lines)
@@ -60,11 +68,10 @@ for monkey in monkeys:
     monkey.set_companions(monkeys[companions[0]], monkeys[companions[1]])
 
 monkey_items = {monkey.id:0 for monkey in monkeys}
-for _ in range(20):
+for _ in range(10000):
     for monkey in monkeys:
         for _ in range(len(monkey.items)):
             monkey_items[monkey.id] += 1
             monkey.inspect_item()
 
 print(monkey_items)
-

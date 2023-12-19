@@ -19,12 +19,14 @@ def move_tail(head_pos, tail_pos):
 
 
 def execute_moves(moves):
-    head_pos, tail_pos, all_tail_pos = [0,0], [0,0], [[0,0]]
+    head_pos, tail_pos, final_pos, all_tail_pos = [0,0], [0,0], [0,0], [[0,0]]
     for move in moves:
         instructions = move.split()
         for _ in range(int(instructions[1])):
             move_head(head_pos, instructions[0])
             move_tail(head_pos, tail_pos)
+            for _ in range():
+                move_tail(tail_pos, final_pos)
 
             if (tail_pos not in all_tail_pos):
                 all_tail_pos.append(tail_pos[:])
